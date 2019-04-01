@@ -102,7 +102,10 @@ app.addCity = function (cn) {
         type: "GET",
         url: apiEx,
         error: function (e) {
-            alert("FFF");
+            var error = document.createElement('<div>');
+            error.innerHTML = "<h1>Сейчас нет подключения к интернету, не могу загрузить страницу</h1>";
+            error.classList.add('template');
+            app.container.appendChild(error);
         },
         success: function(result) {
             getResponse(result);
