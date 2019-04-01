@@ -76,6 +76,7 @@
             top: 2%;
             right: 2%;
         }
+        
         .open-dialog {
             font-size: 2.7rem!important;
         }
@@ -166,6 +167,9 @@
             height: 50px;
             background-size: cover;
         }
+        .clock {
+            text-align: center;
+        }
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.5rem;
@@ -178,9 +182,6 @@
             }
             .header--right {
                 width: 25%;
-            }
-            .clock {
-                display: none;
             }
             footer p{
                 font-size: 1rem;
@@ -243,7 +244,10 @@
 
 
 </div>
-<div class="clock">{time}</div>
+<div class="container">
+    <div class="clock">{time}</div>
+</div>
+
     <footer>
         <p>&copy;2019. All rights reserved. Weather App by Nikas</p>
     </footer>
