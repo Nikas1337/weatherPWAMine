@@ -2,6 +2,7 @@ var cacheName = 'weatherPWA-v1.5.7';
 var filesToCache = [
     '/weatherPWAMine/index.html',
     '/weatherPWAMine/js/app.js',
+    '/weatherPWAMine/js/manifest.json',
     '/weatherPWAMine/js/localforage.js',
     '/weatherPWAMine/images/clear.png',
     '/weatherPWAMine/images/cloudy-scattered-showers.png',
