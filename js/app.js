@@ -181,6 +181,7 @@ window.addEventListener('DOMContentLoaded', function () {
             app.fullcities.forEach(function (city) {
                 getResponse(city);
             })
+            app.fullcities = [];
         } else {
 
         }
