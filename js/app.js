@@ -33,19 +33,19 @@ var getResponse = function (resp) {
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
         temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/images/clear.png)";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/clear.png)";
     } else if (resp.weather[0].description == "пасмурно") {
         temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/images/cloudy.png)";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
     } else if (resp.weather[0].description == "слегка облачно") {
         temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/images/partly-cloudy.png)";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/partly-cloudy.png)";
     } else if (resp.weather[0].description == "легкий дождь") {
         temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/images/cloudy-scattered-showers.png)";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy-scattered-showers.png)";
     } else if (resp.weather[0].description == "облачно") {
         temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/images/cloudy.png)";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
     }
     temp.setAttribute('data', app.current);
     app.current+=1;
@@ -126,7 +126,7 @@ window.addEventListener('DOMContentLoaded', function () {
 var jsonCities = [];
 $.ajax({
     type: "GET",
-    url: '/city-list.json',
+    url: '/weatherPWAMine/city-list.json',
     success: function (res) {
         console.log(res);
         jsonCities = res;
@@ -143,7 +143,7 @@ $.ajax({
 });
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-        .register('/service-worker.js')
+        .register('/weatherPWAMine/service-worker.js')
         .then(function() {
             console.log('Service Worker Registered');
         });

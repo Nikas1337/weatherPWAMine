@@ -1,15 +1,15 @@
 var cacheName = 'weatherPWA-v1.5.5';
 var filesToCache = [
-    '/index.html',
-    '/js/app.js',
-    '/js/localforage.js',
-    '/images/clear.png',
-    '/images/cloudy-scattered-showers.png',
-    '/images/cloudy.png',
-    '/images/cloudy_s_sunny.png',
-    '/images/partly-cloudy.png',
-    '/images/rain.png',
-    '/images/wind.png'
+    '/weatherPWAMine/index.html',
+    '/weatherPWAMine/js/app.js',
+    '/weatherPWAMine/js/localforage.js',
+    '/weatherPWAMine/images/clear.png',
+    '/weatherPWAMine/images/cloudy-scattered-showers.png',
+    '/weatherPWAMine/images/cloudy.png',
+    '/weatherPWAMine/images/cloudy_s_sunny.png',
+    '/weatherPWAMine/images/partly-cloudy.png',
+    '/weatherPWAMine/images/rain.png',
+    '/weatherPWAMine/images/wind.png'
 ];
 
 self.addEventListener('install', function (e) {
