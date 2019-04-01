@@ -46,6 +46,9 @@ var getResponse = function (resp) {
     } else if (resp.weather[0].description == "облачно") {
         temp.children[3].innerHTML = "";
         temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
+    } else if (resp.weather[0].description == "мокрый снег") {
+        temp.children[3].innerHTML = "";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
     }
     temp.setAttribute('data', app.current);
     app.current+=1;

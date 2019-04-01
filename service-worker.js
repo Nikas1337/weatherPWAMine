@@ -1,4 +1,4 @@
-var cacheName = 'weatherPWA-v1.6.2';
+var cacheName = 'weatherPWA-v1.6.3';
 var filesToCache = [
     '/weatherPWAMine/',
     '/weatherPWAMine/index.html',
@@ -11,7 +11,9 @@ var filesToCache = [
     '/weatherPWAMine/images/cloudy_s_sunny.png',
     '/weatherPWAMine/images/partly-cloudy.png',
     '/weatherPWAMine/images/rain.png',
-    '/weatherPWAMine/images/wind.png'
+    '/weatherPWAMine/images/wind.png',
+    '/weatherPWAMine/images/sleet.png',
+    '/weatherPWAMine/favicon.ico'
 ];
 
 self.addEventListener('install', function (e) {
