@@ -102,10 +102,7 @@ app.addCity = function (cn) {
         type: "GET",
         url: apiEx,
         error: function (e) {
-            var error = document.createElement('<div>');
-            error.innerHTML = "<h1>Сейчас нет подключения к интернету, не могу загрузить страницу</h1>";
-            error.classList.add('template');
-            app.container.appendChild(error);
+            $('#app').html("<div class='template'><h1>Ошибка подключения к сервису погоды, попробуйте позже</h1></div>")
         },
         success: function(result) {
             getResponse(result);
