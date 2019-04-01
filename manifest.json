@@ -4,8 +4,8 @@
   "theme_color": "#a1a1a1",
   "background_color": "#262626",
   "display": "fullscreen",
-  "Scope": "/",
-  "start_url": "/",
+  "Scope": "/weatherPWAMine/",
+  "start_url": "/weatherPWAMine/",
   "icons": [
     {
       "src": "/weatherPWAMine/images/icons/icon-72x72.png",
