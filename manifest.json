@@ -5,7 +5,7 @@
   "background_color": "#f1f1f1",
   "display": "fullscreen",
   "Scope": "/weatherPWAMine/",
-  "start_url": "/weatherPWAMine/",
+  "start_url": "/weatherPWAMine/index.html",
   "icons": [
     {
       "src": "/weatherPWAMine/images/icons/icon-72x72.png",
