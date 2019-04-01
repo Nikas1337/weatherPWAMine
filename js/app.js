@@ -70,8 +70,9 @@ var getResponse = function (resp) {
         .replace("{temp}", Math.floor(resp.main.temp) + "&deg; C")
         .replace("{weatherNow}", resp.weather[0].description)
         .replace("{windNow}",resp.wind.speed +" м/c")
-        .replace("{humidity}", resp.main.humidity+ "%")
-        .replace("{time}", "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month);
+        .replace("{humidity}", resp.main.humidity+ "%");
+    app.timer.innerHTML.replace("{time}", "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month);
+
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
         temp.children[3].innerHTML = "";
