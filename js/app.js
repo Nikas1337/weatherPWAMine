@@ -49,10 +49,9 @@ var getTime = function () {
     var hours = nullOrNot(date.getHours());
     var month = nullOrNot(date.getMonth()+1);
     var day = nullOrNot(date.getDate());
-    app.timer.innerHTML = hours + ":" + mins + " " + dOfWeek + " " + day +"." + month + " " + date.getFullYear()+ " г.";
+    return {mins:mins,hours:hours,month:month,day:day,dOfWeek:dOfWeek}
 };
-getTime();
-setInterval(getTime, 1000);
+
 var APIKey = '4d1c3563a5585646e0f0269852da6a2c&units=metric';
 var delKey = document.querySelectorAll('.del');
 var getResponse = function (resp) {
@@ -65,12 +64,14 @@ var getResponse = function (resp) {
             rusname = app.newList[i].rusname;
         }
     }
+    var time = getTime();
     temp.innerHTML = temp.innerHTML
         .replace("{city}", rusname)
         .replace("{temp}", Math.floor(resp.main.temp) + "&deg; C")
         .replace("{weatherNow}", resp.weather[0].description)
         .replace("{windNow}",resp.wind.speed +" м/c")
-        .replace("{humidity}", resp.main.humidity+ "%");
+        .replace("{humidity}", resp.main.humidity+ "%")
+        .replace("{time}", "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month);
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
         temp.children[3].innerHTML = "";
