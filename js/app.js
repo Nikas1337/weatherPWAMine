@@ -102,7 +102,7 @@ app.addCity = function (cn) {
         type: "GET",
         url: apiEx,
         error: function (e) {
-            $('#app').html("<div class='template'><h1>Ошибка подключения к сервису погоды, попробуйте позже</h1></div>")
+            $('#app').html("<div class='template'><h1 align='center'>Ошибка подключения к сервису погоды, попробуйте позже</h1></div>")
         },
         success: function(result) {
             getResponse(result);
