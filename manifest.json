@@ -1,8 +1,8 @@
 {
   "name": "Nikas Weather App",
   "short_name": "NikWeather",
-  "theme_color": "#a1a1a1",
-  "background_color": "#262626",
+  "theme_color": "#0095ec",
+  "background_color": "#f1f1f1",
   "display": "fullscreen",
   "Scope": "/weatherPWAMine/",
   "start_url": "/weatherPWAMine/",
