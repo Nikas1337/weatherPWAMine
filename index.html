@@ -26,8 +26,8 @@
         }
         body {
             margin: 0;
-            background: #e1e1e1;
-            color: #262626;
+            background: #0095ec;
+            color: #f1f1f1;
             font-size: 20px;
             min-height: 95vh;
             font-family: "El Messiri";
@@ -36,7 +36,7 @@
         header {
             display: flex;
             justify-content: space-around;
-            background: #d1d1d1;
+            background: #f1f1f1;
             color: #262626;
             position: fixed;
             top: 0;
@@ -86,7 +86,7 @@
             z-index: 2;
         }
         #app {
-            margin-top: 50px;
+            margin-top: 20px;
             position: relative;
             display: flex;
             justify-content: space-around;
@@ -105,9 +105,27 @@
         .dialog-container-wrap {
             background: #e1e1e1;
             position: absolute;
-            top: 45%;
-            left: 45%;
+            top: 35%;
+            border-radius: 10px;
+            width: 30%;
+            left: 35%;
             padding: 50px;
+        }
+        .dialog-container {
+            background: #0095ec;
+            color: #f1f1f1;
+            border-radius: 10px;
+            padding: 15px;
+            width: 100%;
+            border: 0;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        .dialog-container option {
+            margin: 15px 0;
+        }
+        .dialog-container option:hover {
+            background: #001859;
         }
         .chosen-container{
             color: #000;
@@ -115,8 +133,10 @@
             padding: 15px;
         }
         .choose-city {
-            color: #262626;
+            color: #f1f1f1;
+            background: #0095ec;
             border: 2px solid;
+            text-align: center;
             padding: 10px;
             cursor: pointer;
         }
@@ -124,12 +144,16 @@
             cursor: pointer;
         }
         .template {
-            background: #c4c4c4;
+            background: #f1f1f1;
             color: #262626;
+            border-radius: 50px;
             width: 80%;
-            padding: 1.5rem;
+            padding: 2.5rem 2.5rem 3.5rem;
             margin-bottom: 1rem;
             transition: .4s;
+        }
+        .del {
+            text-align: right;
         }
         .template .weatherNow {
             width: 50px;
@@ -153,9 +177,10 @@
                 font-size: 1rem;
             }
             .dialog-container-wrap {
-                left: 0%;
-                top: 35%;
-                width: 100%;
+                left: 1%;
+                top: 30%;
+                width: 98%;
+
                 padding: 100px 50px;
             }
             .dialog-container {
