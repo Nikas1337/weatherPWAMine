@@ -1,0 +1,32 @@
+[
+  {
+    "country": "RU",
+    "name": "Saint Petersburg",
+    "rusname": "Санкт-Петербург"
+  },
+  {
+    "country": "RU",
+    "name": "Moscow",
+    "rusname": "Москва"
+  },
+  {
+    "country": "RU",
+    "name": "Voronezh",
+    "rusname": "Воронеж"
+  },
+  {
+    "country": "RU",
+    "name": "Omsk",
+    "rusname": "Омск"
+  },
+  {
+    "country": "RU",
+    "name": "Novosibirsk",
+    "rusname": "Новосибирск"
+  },
+  {
+    "country": "RU",
+    "name": "Priozersk",
+    "rusname": "Приозерск"
+  }
+]
