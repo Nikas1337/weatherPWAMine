@@ -11,7 +11,8 @@ var app = {
     daysOfWeek: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
     current:0,
     timer: document.querySelector(".clock"),
-    newList:[]
+    newList:[],
+    fullcities:[]
 };
 var getTime = function () {
     var date = new Date();
@@ -71,8 +72,13 @@ var getResponse = function (resp) {
         .replace("{weatherNow}", resp.weather[0].description)
         .replace("{windNow}",resp.wind.speed +" м/c")
         .replace("{humidity}", resp.main.humidity+ "%");
-    app.timer.innerHTML = "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month;
-
+    var lastTime = "";
+    if (resp.lastTime == undefined) {
+        lastTime = "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month;
+    }
+    app.timer.innerHTML = lastTime;
+    app.fullcities.push({name:resp.name, main:{temp:resp.main.temp, humidity:resp.main.humidity}, weather:[{description:resp.weather[0].description}], wind:{speed:resp.wind.speed}, lastTime:lastTime});
+    window.localforage.setItem('fullList', app.fullcities);
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
         temp.children[3].innerHTML = "";
@@ -162,6 +168,18 @@ window.addEventListener('DOMContentLoaded', function () {
             app.selectedCities = cityList;
             app.selectedCities.forEach(function (city) {
                 app.addCity(city.label);
+            })
+        } else {
+
+        }
+    })
+});
+window.addEventListener('DOMContentLoaded', function () {
+    window.localforage.getItem('fullList', function (err, cityList) {
+        if (cityList) {
+            app.fullcities = cityList;
+            app.fullcities.forEach(function (city) {
+                getResponse(city);
             })
         } else {
 
