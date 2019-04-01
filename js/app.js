@@ -8,10 +8,51 @@ var app = {
     pushDialog: document.querySelector('.open-dialog'),
     selectCity: document.querySelector('.choose-city'),
     update: document.querySelector('.update'),
-    daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    daysOfWeek: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
     current:0,
+    timer: document.querySelector(".clock"),
     newList:[]
 };
+var getTime = function () {
+    var date = new Date();
+    var dOfWeek = "";
+    switch (date.getDay()) {
+        case 0:
+            dOfWeek = app.daysOfWeek[0];
+            break;
+        case 1:
+            dOfWeek = app.daysOfWeek[1];
+            break;
+        case 2:
+            dOfWeek = app.daysOfWeek[2];
+            break;
+        case 3:
+            dOfWeek = app.daysOfWeek[3];
+            break;
+        case 4:
+            dOfWeek = app.daysOfWeek[4];
+            break;
+        case 5:
+            dOfWeek = app.daysOfWeek[5];
+            break;
+        case 6:
+            dOfWeek = app.daysOfWeek[6];
+            break;
+    }
+    var nullOrNot = function (hms) {
+        if (hms < 10 ){
+            return "0" + hms;
+        }
+        return hms
+    };
+    var mins = nullOrNot(date.getMinutes());
+    var hours = nullOrNot(date.getHours());
+    var month = nullOrNot(date.getMonth()+1);
+    var day = nullOrNot(date.getDate());
+    app.timer.innerHTML = hours + ":" + mins + " " + dOfWeek + " " + day +"." + month + " " + date.getFullYear()+ " г.";
+};
+getTime();
+setInterval(getTime, 1000);
 var APIKey = '4d1c3563a5585646e0f0269852da6a2c&units=metric';
 var delKey = document.querySelectorAll('.del');
 var getResponse = function (resp) {
