@@ -71,7 +71,7 @@ var getResponse = function (resp) {
         .replace("{weatherNow}", resp.weather[0].description)
         .replace("{windNow}",resp.wind.speed +" м/c")
         .replace("{humidity}", resp.main.humidity+ "%");
-    app.timer.innerHTML.replace("{time}", "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month);
+    app.timer.innerHTML = "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month;
 
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
