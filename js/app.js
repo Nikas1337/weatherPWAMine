@@ -74,8 +74,8 @@ var getResponse = function (resp) {
         .replace("{humidity}", resp.main.humidity+ "%");
     var lastTime = "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month;
     app.timer.innerHTML = lastTime;
-    // app.fullcities.push({name:resp.name, main:{temp:resp.main.temp, humidity:resp.main.humidity}, weather:[{description:resp.weather[0].description}], wind:{speed:resp.wind.speed}, lastTime:lastTime});
-    // window.localforage.setItem('fullList', app.fullcities);
+    app.fullcities.push({name:resp.name, main:{temp:resp.main.temp, humidity:resp.main.humidity}, weather:[{description:resp.weather[0].description}], wind:{speed:resp.wind.speed}, lastTime:lastTime});
+    window.localforage.setItem('fullList', app.fullcities);
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
         temp.children[3].innerHTML = "";
@@ -151,7 +151,17 @@ app.addCity = function (cn) {
         type: "GET",
         url: apiEx,
         error: function (e) {
-            $('#app').html("<div class='template'><h1 align='center'>Ошибка подключения к сервису погоды, попробуйте позже</h1></div>")
+            window.localforage.getItem('fullList', function (err, cityList) {
+                if (cityList) {
+                    app.fullcities = cityList;
+                    app.fullcities.forEach(function (city) {
+                        getResponse(city);
+                    });
+                    app.fullcities = [];
+                } else {
+                    $('#app').html("<div class='template'><h1>Сервер погоды временно не доступен</h1></div>")
+                }
+            });
         },
         success: function(result) {
             getResponse(result);
@@ -171,19 +181,9 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     })
 });
-// window.addEventListener('DOMContentLoaded', function () {
-//     window.localforage.getItem('fullList', function (err, cityList) {
-//         if (cityList) {
-//             app.fullcities = cityList;
-//             app.fullcities.forEach(function (city) {
-//                 getResponse(city);
-//             })
-//             app.fullcities = [];
-//         } else {
-//
-//         }
-//     })
-// });
+
+
+
 
 var jsonCities = [];
 $.ajax({
