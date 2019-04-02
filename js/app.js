@@ -113,7 +113,7 @@ var getResponse = function (resp) {
 };
 var getResponseOffline = function (resp) {
     console.log(app.fullcities);
-    $("#app").html(app.cardTemplate.innerHTML);
+
     var temp = app.cardTemplate.cloneNode();
     temp.innerHTML = app.cardTemplate.innerHTML;
     var rusname ="";
@@ -214,7 +214,9 @@ app.addCity = function (cn) {
             window.localforage.getItem('fullList', function (err, cityList) {
                 if (cityList) {
                     app.fullcities = cityList;
-                    console.log(app.fullcities);
+                    var apptemp = app.cardTemplate;
+                    apptemp.style.display = "none";
+                    $('#app').html(apptemp);
                     app.fullcities.forEach(function (city) {
                         getResponseOffline(city);
                     });
