@@ -158,6 +158,7 @@ app.addCity = function (cn) {
                         getResponse(city);
                     });
                     app.fullcities = [];
+                    window.localforage.setItem('fullList', app.fullcities);
                 } else {
                     $('#app').html("<div class='template'><h1>Сервер погоды временно не доступен</h1></div>")
                 }
