@@ -214,9 +214,7 @@ app.addCity = function (cn) {
             window.localforage.getItem('fullList', function (err, cityList) {
                 if (cityList) {
                     app.fullcities = cityList;
-                    var apptemp = app.cardTemplate;
-                    apptemp.style.display = "none";
-                    $('#app').html(apptemp);
+                    $('#app').html("");
                     app.fullcities.forEach(function (city) {
                         getResponseOffline(city);
                     });

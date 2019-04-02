@@ -1,4 +1,4 @@
-var cacheName = 'weatherPWA-v1.8.7';
+var cacheName = 'weatherPWA-v1.8.8';
 var filesToCache = [
     '/weatherPWAMine/',
     '/weatherPWAMine/index.html',
