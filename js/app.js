@@ -12,7 +12,8 @@ var app = {
     current:0,
     timer: document.querySelector(".clock"),
     newList:[],
-    fullcities:[]
+    fullcities:[],
+    offline:false
 };
 var getTime = function () {
     var date = new Date();
@@ -191,12 +192,17 @@ $('.update').click(function () {
     })
 });
 app.selectCity.addEventListener('click', function () {
-    var selected = app.addDialog.options[app.addDialog.selectedIndex];
-    var cityName = selected.value;
-    var key = app.addDialog.selectedIndex;
-    app.selectedCities.push({key: key, label: cityName});
-    window.localforage.setItem('selectedCities', app.selectedCities);
-    app.addCity(cityName);
+    if (!app.offline) {
+        var selected = app.addDialog.options[app.addDialog.selectedIndex];
+        var cityName = selected.value;
+        var key = app.addDialog.selectedIndex;
+        app.selectedCities.push({key: key, label: cityName});
+        window.localforage.setItem('selectedCities', app.selectedCities);
+        app.addCity(cityName);
+    } else {
+        alert("Нет соединения с сервером");
+    }
+
 });
 app.addCity = function (cn) {
     var apiEx = 'https://api.openweathermap.org/data/2.5/weather?q=' + cn +',ru&appid=' + APIKey+"&lang=ru";
@@ -204,6 +210,7 @@ app.addCity = function (cn) {
         type: "GET",
         url: apiEx,
         error: function (e) {
+            app.offline = true;
             window.localforage.getItem('fullList', function (err, cityList) {
                 if (cityList) {
                     app.fullcities = cityList;
@@ -229,7 +236,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 app.addCity(city.label);
             })
         } else {
-
+            app.selectedCities =[];
         }
     })
 });
