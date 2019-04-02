@@ -112,7 +112,7 @@ var getResponse = function (resp) {
     })
 };
 var getResponseOffline = function (resp) {
-    console.log(app.newList);
+    console.log(app.fullcities);
     var temp = app.cardTemplate.cloneNode();
     temp.innerHTML = app.cardTemplate.innerHTML;
     var rusname ="";
@@ -211,17 +211,17 @@ app.addCity = function (cn) {
         url: apiEx,
         error: function (e) {
             app.offline = true;
-            // window.localforage.getItem('fullList', function (err, cityList) {
-            //     if (cityList) {
-            //         app.fullcities = cityList;
-            //         console.log(app.fullcities);
-            //         app.fullcities.forEach(function (city) {
-            //             getResponseOffline(city);
-            //         });
-            //     } else {
-            //         $('#app').html("<div class='template'><h1>Сервер погоды временно не доступен</h1></div>")
-            //     }
-            // });
+            window.localforage.getItem('fullList', function (err, cityList) {
+                if (cityList) {
+                    app.fullcities = cityList;
+                    console.log(app.fullcities);
+                    app.fullcities.forEach(function (city) {
+                        getResponseOffline(city);
+                    });
+                } else {
+                    $('#app').html("<div class='template'><h1>Сервер погоды временно не доступен</h1></div>")
+                }
+            });
         },
         success: function(result) {
             console.log('success');
