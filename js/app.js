@@ -214,6 +214,7 @@ app.addCity = function (cn) {
             window.localforage.getItem('fullList', function (err, cityList) {
                 if (cityList) {
                     app.fullcities = cityList;
+                    console.log(app.fullcities);
                     app.fullcities.forEach(function (city) {
                         getResponseOffline(city);
                     });
@@ -223,6 +224,7 @@ app.addCity = function (cn) {
             });
         },
         success: function(result) {
+            console.log('success');
             getResponse(result);
             close()
         }
