@@ -3,8 +3,7 @@
   "short_name": "NikWeather",
   "theme_color": "#0095ec",
   "background_color": "#f1f1f1",
-  "display": "fullscreen",
-  "Scope": "/weatherPWAMine/",
+  "display": "standalone",
   "start_url": "/weatherPWAMine/index.html",
   "icons": [
     {
