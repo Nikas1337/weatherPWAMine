@@ -113,6 +113,7 @@ var getResponse = function (resp) {
 };
 var getResponseOffline = function (resp) {
     console.log(app.fullcities);
+    $("#app").html(app.cardTemplate.innerHTML);
     var temp = app.cardTemplate.cloneNode();
     temp.innerHTML = app.cardTemplate.innerHTML;
     var rusname ="";
@@ -128,8 +129,7 @@ var getResponseOffline = function (resp) {
         .replace("{weatherNow}", resp.weather[0].description)
         .replace("{windNow}",resp.wind.speed +" м/c")
         .replace("{humidity}", resp.main.humidity+ "%");
-    var lastTime = "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month;
-    app.timer.innerHTML = lastTime;
+    app.timer.innerHTML = resp.lastTime;
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
         temp.children[3].innerHTML = "";
