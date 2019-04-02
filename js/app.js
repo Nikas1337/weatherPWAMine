@@ -110,6 +110,59 @@ var getResponse = function (resp) {
 
     })
 };
+var getResponseOffline = function (resp) {
+    console.log(app.newList);
+    var temp = app.cardTemplate.cloneNode();
+    temp.innerHTML = app.cardTemplate.innerHTML;
+    var rusname ="";
+    for (let i = 0; i < app.newList.length; i++) {
+        if (resp.name == app.newList[i].name) {
+            rusname = app.newList[i].rusname;
+        }
+    }
+    var time = getTime();
+    temp.innerHTML = temp.innerHTML
+        .replace("{city}", rusname)
+        .replace("{temp}", Math.floor(resp.main.temp) + "&deg; C")
+        .replace("{weatherNow}", resp.weather[0].description)
+        .replace("{windNow}",resp.wind.speed +" м/c")
+        .replace("{humidity}", resp.main.humidity+ "%");
+    var lastTime = "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month;
+    app.timer.innerHTML = lastTime;
+    app.container.appendChild(temp);
+    if (resp.weather[0].description == "ясно") {
+        temp.children[3].innerHTML = "";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/clear.png)";
+    } else if (resp.weather[0].description == "пасмурно") {
+        temp.children[3].innerHTML = "";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
+    } else if (resp.weather[0].description == "слегка облачно") {
+        temp.children[3].innerHTML = "";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/partly-cloudy.png)";
+    } else if (resp.weather[0].description == "легкий дождь") {
+        temp.children[3].innerHTML = "";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy-scattered-showers.png)";
+    } else if (resp.weather[0].description == "облачно") {
+        temp.children[3].innerHTML = "";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
+    } else if (resp.weather[0].description == "мокрый снег") {
+        temp.children[3].innerHTML = "";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
+    }
+    temp.setAttribute('data', app.current);
+    app.current+=1;
+    temp.firstElementChild.addEventListener('click',function () {
+        var dataCur = parseInt(temp.getAttribute('data'));
+        app.selectedCities.splice(dataCur, 1);
+        window.localforage.setItem('selectedCities', app.selectedCities);
+        console.log(app.selectedCities);
+        this.parentElement.style.opacity = 0;
+        setTimeout(() => {
+            this.parentElement.remove();
+        },400)
+
+    })
+};
 var close = function () {
     $('.dialog-wrap').animate({'opacity' : 0}, 200);
     $('.dialog-wrap').animate({'z-index': -1}, 1);
@@ -155,9 +208,8 @@ app.addCity = function (cn) {
                 if (cityList) {
                     app.fullcities = cityList;
                     app.fullcities.forEach(function (city) {
-                        getResponse(city);
+                        getResponseOffline(city);
                     });
-
                     window.localforage.setItem('fullList', app.fullcities);
                 } else {
                     $('#app').html("<div class='template'><h1>Сервер погоды временно не доступен</h1></div>")
