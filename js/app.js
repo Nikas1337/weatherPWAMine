@@ -168,7 +168,7 @@ var close = function () {
     $('.dialog-wrap').animate({'opacity' : 0}, 200);
     $('.dialog-wrap').animate({'z-index': -1}, 1);
 
-}
+};
 var buildList = function(items) {
     for (let i = 0; i < items.length ; i++) {
         app.addDialog.innerHTML += "<option value='"+items[i].rusname+"' data='"+ i +"'>" + items[i].rusname + "</option>"
@@ -182,6 +182,9 @@ $('.open-dialog').click(function () {
 });
 $('.dialog-container-wrap').click(function (e) {
     e.stopPropagation();
+});
+$('.dialog-wrap').click(function () {
+    close();
 })
 $('.close').click(function () {
     close()
