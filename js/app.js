@@ -180,6 +180,9 @@ $('.open-dialog').click(function () {
         $('.dialog-wrap').animate({'opacity' : 1}, 200)
 
 });
+$('.dialog-container-wrap').click(function (e) {
+    e.stopPropagation();
+})
 $('.close').click(function () {
     close()
 });
