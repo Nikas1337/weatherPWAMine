@@ -31,6 +31,11 @@
   },
   {
     "country": "RU",
+    "name": "Priozersk",
+    "rusname": "Приозерск"
+  },
+  {
+    "country": "RU",
     "name": "Sortavala",
     "rusname": "Сортавала"
   },
