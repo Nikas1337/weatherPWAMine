@@ -149,6 +149,9 @@ var getResponseOffline = function (resp) {
     } else if (resp.weather[0].description == "мокрый снег") {
         temp.children[3].innerHTML = "";
         temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
+    } else if (resp.weather[0].description == "дождь") {
+        temp.children[3].innerHTML = "";
+        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/rain.png)";
     }
     temp.setAttribute('data', app.current);
     app.current+=1;
