@@ -26,7 +26,32 @@
   },
   {
     "country": "RU",
-    "name": "Priozersk",
-    "rusname": "Приозерск"
+    "name": "Sertolovo",
+    "rusname": "Сертолово"
+  },
+  {
+    "country": "RU",
+    "name": "Sortavala",
+    "rusname": "Сортавала"
+  },
+  {
+    "country": "RU",
+    "name": "Peterhof",
+    "rusname": "Петергоф"
+  },
+  {
+    "country": "RU",
+    "name": "Smolensk",
+    "rusname": "Смоленск"
+  },
+  {
+    "country": "RU",
+    "name": "Orel",
+    "rusname": "Орел"
+  },
+  {
+    "country": "RU",
+    "name": "Belyashi",
+    "rusname": "Беляши"
   }
 ]
