@@ -158,14 +158,39 @@
             margin-bottom: 1rem;
             transition: .4s;
             box-shadow: 0 0 8px rgba(0,0,0,0.5);
+            display: flex;
+            position: relative;
+            flex-wrap: wrap;
         }
         .del {
             text-align: right;
-        }
-        .template .weatherNow {
+            position: absolute;
+            right: 3%;
+            top: 3%;
+            font-size: 2rem;
             width: 50px;
             height: 50px;
+        }
+        .city {
+            font-size: 3rem;
+            width: 50%;
+        }
+        .temperatureNow {
+            width: 50%;
+            text-align: center;
+            font-size: 6rem;
+        }
+        .template .weatherNow {
+            width: 100px;
+            height: 100px;
             background-size: cover;
+            justify-self: center;
+        }
+        .windNow {
+            width: 100%;
+        }
+        .humidity {
+            width: 100%;
         }
         .clock {
             text-align: center;
@@ -176,6 +201,13 @@
             }
             .template {
                 width: 95%;
+            }
+            .city {
+                width: 100%;
+                font-size: 2.5rem;
+            }
+            .temperatureNow {
+                width: 100%;
             }
             header {
                 max-width: 100vw;
@@ -217,11 +249,11 @@
     <div class="template">
         <div class="del">&times;</div>
         <div class="city">{city}</div>
-        <div class="temperatureNow">Температура: {temp}</div>
         <div class="weatherNow">Погода: {weatherNow}</div>
+        <div class="temperatureNow">{temp}</div>
         <div class="windNow">Ветер: {windNow}</div>
         <div class="humidity">Влажность: {humidity}</div>
-</div>
+    </div>
 </div>
     <main id="app">
 

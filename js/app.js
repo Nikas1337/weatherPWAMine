@@ -79,26 +79,26 @@ var getResponse = function (resp) {
     window.localforage.setItem('fullList', app.fullcities);
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/clear.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/clear.png)";
     } else if (resp.weather[0].description == "пасмурно") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
     } else if (resp.weather[0].description == "слегка облачно") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/partly-cloudy.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/partly-cloudy.png)";
     } else if (resp.weather[0].description == "легкий дождь") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy-scattered-showers.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/cloudy-scattered-showers.png)";
     } else if (resp.weather[0].description == "облачно") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
     } else if (resp.weather[0].description == "мокрый снег") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
     } else if (resp.weather[0].description == "дождь") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/rain.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/rain.png)";
     }
     temp.setAttribute('data', app.current);
     app.current+=1;
@@ -135,26 +135,26 @@ var getResponseOffline = function (resp) {
     app.timer.innerHTML = resp.lastTime;
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/clear.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/clear.png)";
     } else if (resp.weather[0].description == "пасмурно") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
     } else if (resp.weather[0].description == "слегка облачно") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/partly-cloudy.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/partly-cloudy.png)";
     } else if (resp.weather[0].description == "легкий дождь") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy-scattered-showers.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/cloudy-scattered-showers.png)";
     } else if (resp.weather[0].description == "облачно") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
     } else if (resp.weather[0].description == "мокрый снег") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
     } else if (resp.weather[0].description == "дождь") {
-        temp.children[3].innerHTML = "";
-        temp.children[3].style.backgroundImage = "url(/weatherPWAMine/images/rain.png)";
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/rain.png)";
     }
 
     temp.setAttribute('data', app.current);
