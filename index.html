@@ -180,6 +180,11 @@
         }
         .windNow, .humidity {
             margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 51%;
+            font-weight: bold;
         }
         .humidity {
             margin-bottom: 0!important;
@@ -197,12 +202,6 @@
             right: 10%;
             top: 15%;
         }
-        .windNow {
-            width: 100%;
-        }
-        .humidity {
-            width: 100%;
-        }
         .clock {
             text-align: center;
         }
@@ -216,7 +215,7 @@
             }
             .city {
                 width: 100%;
-                font-size: 2.5rem;
+                font-size: 2.2rem;
                 text-align: center;
             }
             .temperatureNow {
@@ -247,11 +246,18 @@
             .dialog-container {
                 width: 100%;
             }
+            .humidity, .windNow {
+                text-align: center;
+                justify-content: space-around;
+            }
         }
         @media (max-width: 370px) {
             .template .weatherNow {
-                width: 150px;
-                height: 150px;
+                width: 125px;
+                height: 125px;
+            }
+            .city {
+                font-size: 1.7rem;
             }
             .temperatureNow {
                 font-size: 4rem;
@@ -289,8 +295,8 @@
         <div class="city">{city}</div>
         <div class="weatherNow">Погода: {weatherNow}</div>
         <div class="temperatureNow">{temp}</div>
-        <div class="windNow">Ветер: {windNow}</div>
-        <div class="humidity">Влажность: {humidity}</div>
+        <div class="windNow"><img src="https://img.icons8.com/ios/50/000000/wind.png">  {windNow}</div>
+        <div class="humidity"><img src="https://img.icons8.com/ios/50/000000/humidity.png"> {humidity}</div>
     </div>
 </div>
     <main id="app">
