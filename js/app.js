@@ -57,8 +57,11 @@ var getTime = function () {
 var APIKey = '4d1c3563a5585646e0f0269852da6a2c&units=metric';
 var delKey = document.querySelectorAll('.del');
 var getResponse = function (resp) {
+    if (app.selectedCities.indexOf(resp.name) > -1) {
+        return;
+    }
     var temp = app.cardTemplate.cloneNode();
-    app.selectedCities[resp.id]={key: parseInt(resp.id), label: resp.name};
+    app.selectedCities[resp.id]=resp.name;
     window.localforage.setItem('selectedCities', app.selectedCities);
     temp.innerHTML = app.cardTemplate.innerHTML;
     var rusname ="";
@@ -112,7 +115,6 @@ var getResponse = function (resp) {
         window.localforage.setItem('fullList', app.fullcities);
         app.selectedCities.splice(dataCur, 1);
         window.localforage.setItem('selectedCities', app.selectedCities);
-        console.log(app.selectedCities);
         this.parentElement.style.opacity = 0;
         setTimeout(() => {
             this.parentElement.remove();
@@ -121,8 +123,7 @@ var getResponse = function (resp) {
     })
 };
 var getResponseOffline = function (resp) {
-    console.log(app.fullcities);
-    app.selectedCities[resp.id]={key: parseInt(resp.id), label: resp.name};
+    app.selectedCities[resp.id]=resp.name;
     window.localforage.setItem('selectedCities', app.selectedCities);
     var temp = app.cardTemplate.cloneNode();
     temp.innerHTML = app.cardTemplate.innerHTML;
@@ -211,7 +212,7 @@ $('.update').click(function () {
     $('#app').html("");
     app.current =0;
     app.selectedCities.forEach(function (city) {
-        app.addCity(city.label);
+        app.addCity(city);
     })
 });
 app.selectCity.addEventListener('click', function () {
