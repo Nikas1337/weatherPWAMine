@@ -186,7 +186,7 @@ var close = function () {
 };
 var buildList = function(items) {
     for (let i = 0; i < items.length ; i++) {
-        app.addDialog.innerHTML += "<option value='"+items[i].rusname+"' data='"+ i +"'>" + items[i].rusname + "</option>"
+        app.addDialog.innerHTML += "<option value='"+items[i]+"' data='"+ i +"'>" + items[i].rusname + "</option>"
     }
 };
 $('.open-dialog').click(function () {
