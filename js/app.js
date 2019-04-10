@@ -212,6 +212,7 @@ $('.update').click(function () {
     $('#app').html("");
     app.current =0;
     app.selectedCities.forEach(function (city) {
+        console.log(city);
         app.addCity(city);
     })
 });
@@ -227,6 +228,7 @@ app.selectCity.addEventListener('click', function () {
 
 });
 app.addCity = function (cn) {
+    console.log('https://api.openweathermap.org/data/2.5/weather?q=' + cn +',ru&appid=' + APIKey+"&lang=ru");
     var apiEx = 'https://api.openweathermap.org/data/2.5/weather?q=' + cn +',ru&appid=' + APIKey+"&lang=ru";
     $.ajax ({
         type: "GET",
