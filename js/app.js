@@ -58,7 +58,7 @@ var APIKey = '4d1c3563a5585646e0f0269852da6a2c&units=metric';
 var delKey = document.querySelectorAll('.del');
 var getResponse = function (resp) {
     var temp = app.cardTemplate.cloneNode();
-    app.selectedCities[resp.id]({key: parseInt(resp.id), label: resp.name});
+    app.selectedCities[resp.id]={key: parseInt(resp.id), label: resp.name};
     window.localforage.setItem('selectedCities', app.selectedCities);
     temp.innerHTML = app.cardTemplate.innerHTML;
     var rusname ="";
@@ -120,7 +120,7 @@ var getResponse = function (resp) {
 };
 var getResponseOffline = function (resp) {
     console.log(app.fullcities);
-    app.selectedCities[resp.id]({key: parseInt(resp.id), label: resp.name});
+    app.selectedCities[resp.id]={key: parseInt(resp.id), label: resp.name};
     window.localforage.setItem('selectedCities', app.selectedCities);
     var temp = app.cardTemplate.cloneNode();
     temp.innerHTML = app.cardTemplate.innerHTML;
