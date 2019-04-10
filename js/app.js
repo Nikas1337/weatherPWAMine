@@ -57,8 +57,9 @@ var getTime = function () {
 var APIKey = '4d1c3563a5585646e0f0269852da6a2c&units=metric';
 var delKey = document.querySelectorAll('.del');
 var getResponse = function (resp) {
-    console.log(app.newList);
     var temp = app.cardTemplate.cloneNode();
+    app.selectedCities[parseInt(resp.id)]({key: parseInt(resp.id), label: resp.name});
+    window.localforage.setItem('selectedCities', app.selectedCities);
     temp.innerHTML = app.cardTemplate.innerHTML;
     var rusname ="";
     for (let i = 0; i < app.newList.length; i++) {
@@ -75,7 +76,7 @@ var getResponse = function (resp) {
         .replace("{humidity}", resp.main.humidity+ "%");
     var lastTime = "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month;
     app.timer.innerHTML = lastTime;
-    app.fullcities.push({name:resp.name, main:{temp:resp.main.temp, humidity:resp.main.humidity}, weather:[{description:resp.weather[0].description}], wind:{speed:resp.wind.speed}, lastTime:lastTime});
+    app.fullcities.push({name:resp.name, main:{temp:resp.main.temp, humidity:resp.main.humidity}, weather:[{description:resp.weather[0].description}], wind:{speed:resp.wind.speed}, lastTime:lastTime, id:resp.id});
     window.localforage.setItem('fullList', app.fullcities);
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
@@ -99,8 +100,11 @@ var getResponse = function (resp) {
     } else if (resp.weather[0].description == "дождь") {
         temp.children[2].innerHTML = "";
         temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/rain.png)";
+    } else if (resp.weather[0].description == "дождь со снегом") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
     }
-    temp.setAttribute('data', app.current);
+    temp.setAttribute('data', resp.id);
     app.current+=1;
     temp.firstElementChild.addEventListener('click',function () {
         var dataCur = parseInt(temp.getAttribute('data'));
@@ -116,7 +120,8 @@ var getResponse = function (resp) {
 };
 var getResponseOffline = function (resp) {
     console.log(app.fullcities);
-
+    app.selectedCities[parseInt(resp.id)]({key: parseInt(resp.id), label: resp.name});
+    window.localforage.setItem('selectedCities', app.selectedCities);
     var temp = app.cardTemplate.cloneNode();
     temp.innerHTML = app.cardTemplate.innerHTML;
     var rusname ="";
@@ -155,10 +160,11 @@ var getResponseOffline = function (resp) {
     } else if (resp.weather[0].description == "дождь") {
         temp.children[2].innerHTML = "";
         temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/rain.png)";
+    } else if (resp.weather[0].description == "дождь со снегом") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
     }
-
-    temp.setAttribute('data', app.current);
-    app.current+=1;
+    temp.setAttribute('data', resp.id);
     temp.firstElementChild.addEventListener('click',function () {
         var dataCur = parseInt(temp.getAttribute('data'));
         app.selectedCities.splice(dataCur, 1);
@@ -208,9 +214,7 @@ app.selectCity.addEventListener('click', function () {
     if (!app.offline) {
         var selected = app.addDialog.options[app.addDialog.selectedIndex];
         var cityName = selected.value;
-        var key = app.addDialog.selectedIndex;
-        app.selectedCities.push({key: key, label: cityName});
-        window.localforage.setItem('selectedCities', app.selectedCities);
+
         app.addCity(cityName);
     } else {
         alert("Нет соединения с сервером");
