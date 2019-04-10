@@ -259,7 +259,7 @@ window.addEventListener('DOMContentLoaded', function () {
         if (cityList) {
             app.selectedCities = cityList;
             app.selectedCities.forEach(function (city) {
-                app.addCity(city.label);
+                app.addCity(city);
             })
         } else {
             app.selectedCities =[];
