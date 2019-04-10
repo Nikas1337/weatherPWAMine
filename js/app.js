@@ -76,7 +76,7 @@ var getResponse = function (resp) {
         .replace("{humidity}", resp.main.humidity+ "%");
     var lastTime = "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month;
     app.timer.innerHTML = lastTime;
-    app.fullcities.push({name:resp.name, main:{temp:resp.main.temp, humidity:resp.main.humidity}, weather:[{description:resp.weather[0].description}], wind:{speed:resp.wind.speed}, lastTime:lastTime, id:resp.id});
+    app.fullcities[resp.id]=({name:resp.name, main:{temp:resp.main.temp, humidity:resp.main.humidity}, weather:[{description:resp.weather[0].description}], wind:{speed:resp.wind.speed}, lastTime:lastTime, id:resp.id});
     window.localforage.setItem('fullList', app.fullcities);
     app.container.appendChild(temp);
     if (resp.weather[0].description == "ясно") {
@@ -108,6 +108,8 @@ var getResponse = function (resp) {
     app.current+=1;
     temp.firstElementChild.addEventListener('click',function () {
         var dataCur = parseInt(temp.getAttribute('data'));
+        app.fullcities.splice(dataCur, 1);
+        window.localforage.setItem('fullList', app.fullcities);
         app.selectedCities.splice(dataCur, 1);
         window.localforage.setItem('selectedCities', app.selectedCities);
         console.log(app.selectedCities);
@@ -167,6 +169,8 @@ var getResponseOffline = function (resp) {
     temp.setAttribute('data', resp.id);
     temp.firstElementChild.addEventListener('click',function () {
         var dataCur = parseInt(temp.getAttribute('data'));
+        app.fullcities.splice(dataCur, 1);
+        window.localforage.setItem('fullList', app.fullcities);
         app.selectedCities.splice(dataCur, 1);
         window.localforage.setItem('selectedCities', app.selectedCities);
         console.log(app.selectedCities);
