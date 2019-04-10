@@ -57,9 +57,6 @@ var getTime = function () {
 var APIKey = '4d1c3563a5585646e0f0269852da6a2c&units=metric';
 var delKey = document.querySelectorAll('.del');
 var getResponse = function (resp) {
-    if (app.selectedCities.indexOf(resp.name) > -1) {
-        return;
-    }
     var temp = app.cardTemplate.cloneNode();
     app.selectedCities[resp.id]=resp.name;
     window.localforage.setItem('selectedCities', app.selectedCities);
@@ -258,7 +255,9 @@ window.addEventListener('DOMContentLoaded', function () {
     window.localforage.getItem('selectedCities', function (err, cityList) {
         if (cityList) {
             app.selectedCities = cityList;
+            console.log(cityList);
             app.selectedCities.forEach(function (city) {
+                console.log(city);
                 app.addCity(city);
             })
         } else {
