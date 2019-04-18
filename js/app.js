@@ -280,7 +280,7 @@ $('.update').click(function () {
     app.current =0;
     app.selectedCities.forEach(function (city) {
         console.log(city);
-        app.addCity(city);
+        app.addCityD(city);
     })
 });
 app.selectCity.addEventListener('click', function () {
