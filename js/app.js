@@ -57,6 +57,76 @@ var getTime = function () {
 var APIKey = '4d1c3563a5585646e0f0269852da6a2c&units=metric';
 var delKey = document.querySelectorAll('.del');
 var getResponse = function (resp) {
+    if (app.selectedCities.indexOf(resp.name) > 0) {
+        alert("Есть такой город");
+        return;
+    }
+    console.log(resp.name)
+    var temp = app.cardTemplate.cloneNode();
+    app.selectedCities[resp.id]=resp.name;
+    window.localforage.setItem('selectedCities', app.selectedCities);
+    temp.innerHTML = app.cardTemplate.innerHTML;
+    var rusname ="";
+    for (let i = 0; i < app.newList.length; i++) {
+        if (resp.name == app.newList[i].name) {
+            rusname = app.newList[i].rusname;
+        }
+    }
+    var time = getTime();
+    temp.innerHTML = temp.innerHTML
+        .replace("{city}", rusname)
+        .replace("{temp}", Math.floor(resp.main.temp) + "&deg; C")
+        .replace("{weatherNow}", resp.weather[0].description)
+        .replace("{windNow}",resp.wind.speed +" м/c")
+        .replace("{humidity}", resp.main.humidity+ "%");
+    var lastTime = "Последний раз обновлялось в " + time.hours +":" +time.mins + " " +time.day+"."+time.month;
+    app.timer.innerHTML = lastTime;
+    app.fullcities[resp.id]=({name:resp.name, main:{temp:resp.main.temp, humidity:resp.main.humidity}, weather:[{description:resp.weather[0].description}], wind:{speed:resp.wind.speed}, lastTime:lastTime, id:resp.id});
+    window.localforage.setItem('fullList', app.fullcities);
+    app.container.appendChild(temp);
+    if (resp.weather[0].description == "ясно") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/clear.png)";
+    } else if (resp.weather[0].description == "пасмурно") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
+    } else if (resp.weather[0].description == "слегка облачно") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/partly-cloudy.png)";
+    } else if (resp.weather[0].description == "легкий дождь") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/cloudy-scattered-showers.png)";
+    } else if (resp.weather[0].description == "облачно") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/cloudy.png)";
+    } else if (resp.weather[0].description == "мокрый снег") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
+    } else if (resp.weather[0].description == "дождь") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/rain.png)";
+    } else if (resp.weather[0].description == "дождь со снегом") {
+        temp.children[2].innerHTML = "";
+        temp.children[2].style.backgroundImage = "url(/weatherPWAMine/images/sleet.png)";
+    }
+    temp.setAttribute('data', resp.id);
+    app.current+=1;
+    temp.firstElementChild.addEventListener('click',function () {
+        var dataCur = parseInt(temp.getAttribute('data'));
+        app.fullcities.splice(dataCur, 1);
+        window.localforage.setItem('fullList', app.fullcities);
+        app.selectedCities.splice(dataCur, 1);
+        window.localforage.setItem('selectedCities', app.selectedCities);
+        this.parentElement.style.opacity = 0;
+        setTimeout(() => {
+            this.parentElement.remove();
+        },400)
+
+    })
+};
+var getResponseD = function (resp) {
+
+    console.log(resp.name)
     var temp = app.cardTemplate.cloneNode();
     app.selectedCities[resp.id]=resp.name;
     window.localforage.setItem('selectedCities', app.selectedCities);
@@ -251,6 +321,33 @@ app.addCity = function (cn) {
         }
     })
 };
+app.addCityD = function (cn) {
+    console.log('https://api.openweathermap.org/data/2.5/weather?q=' + cn +',ru&appid=' + APIKey+"&lang=ru");
+    var apiEx = 'https://api.openweathermap.org/data/2.5/weather?q=' + cn +',ru&appid=' + APIKey+"&lang=ru";
+    $.ajax ({
+        type: "GET",
+        url: apiEx,
+        error: function (e) {
+            app.offline = true;
+            window.localforage.getItem('fullList', function (err, cityList) {
+                if (cityList) {
+                    app.fullcities = cityList;
+                    $('#app').html("");
+                    app.fullcities.forEach(function (city) {
+                        getResponseOffline(city);
+                    });
+                } else {
+                    $('#app').html("<div class='template'><h1>Сервер погоды временно не доступен</h1></div>")
+                }
+            });
+        },
+        success: function(result) {
+            console.log('success');
+            getResponseD(result);
+            close()
+        }
+    })
+};
 window.addEventListener('DOMContentLoaded', function () {
     window.localforage.getItem('selectedCities', function (err, cityList) {
         if (cityList) {
@@ -258,7 +355,7 @@ window.addEventListener('DOMContentLoaded', function () {
             console.log(cityList);
             app.selectedCities.forEach(function (city) {
                 console.log(city);
-                app.addCity(city);
+                app.addCityD(city);
             })
         } else {
             app.selectedCities =[];
